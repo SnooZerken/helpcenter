@@ -1,9 +1,11 @@
-package be.procurement.helpcenter;
+package be.procurement.helpcenter.repositories;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import be.procurement.helpcenter.models.Paragraph;
 
 @Repository
 public interface ParagraphRepository extends JpaRepository<Paragraph, Long> {

@@ -1,4 +1,4 @@
-package be.procurement.helpcenter;
+package be.procurement.helpcenter.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

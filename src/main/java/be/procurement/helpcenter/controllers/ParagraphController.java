@@ -1,4 +1,4 @@
-package be.procurement.helpcenter;
+package be.procurement.helpcenter.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import be.procurement.helpcenter.models.Paragraph;
+import be.procurement.helpcenter.repositories.ParagraphRepository;
 
 @RestController
 @RequestMapping("/paragraphs")
