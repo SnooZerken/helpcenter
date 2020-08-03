@@ -46,7 +46,7 @@ class ParagraphController {
         Preconditions.checkNotNull(resource);       
         Paragraph p = (repository.findById(id)).get();
         
-        p.setBody(resource.getTitle());
+        p.setTitle(resource.getTitle());
         p.setBody(resource.getBody());
 
         return repository.save(p); 
