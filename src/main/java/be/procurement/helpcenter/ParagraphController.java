@@ -34,7 +34,7 @@ class ParagraphController {
     }
  
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public Paragraph create(@RequestBody Paragraph resource) {
         Preconditions.checkNotNull(resource);
         return repository.save(resource);
@@ -46,6 +46,7 @@ class ParagraphController {
         Preconditions.checkNotNull(resource);       
         Paragraph p = (repository.findById(id)).get();
         
+        p.setBody(resource.getTitle());
         p.setBody(resource.getBody());
 
         return repository.save(p); 

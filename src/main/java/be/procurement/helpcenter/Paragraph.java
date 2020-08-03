@@ -10,8 +10,9 @@ import javax.persistence.Id;
 public class Paragraph {
     
     private long id;  
+    private String title;
     private String body;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)  
     public long getId() {
@@ -28,6 +29,14 @@ public class Paragraph {
     public void setBody(String body) {
         this.body = body;
     }
+
+    @Column(name = "title", nullable = true)
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }    
 
     public Paragraph(String body) {
         this.body = body;
@@ -69,5 +78,7 @@ public class Paragraph {
             return false;
         return true;
     }
+
+
 
 }
