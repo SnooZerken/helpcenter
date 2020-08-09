@@ -5,16 +5,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Paragraph {
     
-    private long id;  
-    private String title;
-    private String body;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)  
+    private long id;  
+
+    @Column(name = "title", nullable = true)
+    private String title;
+
+    @Column(name = "body", nullable = false, length=4048)
+    private String body;
+    
+    @Column(name = "weight")
+    private int weight;
+    
+    @JsonBackReference
+    @ManyToOne(optional = false)
+    private Section section;
+
     public long getId() {
         return id;
     }
@@ -22,15 +36,13 @@ public class Paragraph {
         this.id = id;
     }
 
-    @Column(name = "body", nullable = false, length=4048)
     public String getBody() {
         return body;
     }
     public void setBody(String body) {
         this.body = body;
     }
-
-    @Column(name = "title", nullable = true)
+    
     public String getTitle() {
         return title;
     }
@@ -38,47 +50,19 @@ public class Paragraph {
         this.title = title;
     }    
 
-    public Paragraph(String body) {
-        this.body = body;
+    public int getWeight() {
+        return weight;
+    }
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }    
+
+    public Section getSection() {
+        return section;
     }
 
-    public Paragraph(){
-        this.body = "no value";
+    public void setSection(Section section) {
+        this.section = section;
     }
-
-    @Override
-    public String toString() {
-        return "Paragraph [body=" + body + "]";
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((body == null) ? 0 : body.hashCode());
-        result = prime * result + (int) (id ^ (id >>> 32));
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Paragraph other = (Paragraph) obj;
-        if (body == null) {
-            if (other.body != null)
-                return false;
-        } else if (!body.equals(other.body))
-            return false;
-        if (id != other.id)
-            return false;
-        return true;
-    }
-
-
 
 }

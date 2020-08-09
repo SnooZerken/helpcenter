@@ -18,51 +18,41 @@ import org.springframework.web.bind.annotation.RestController;
 
 import be.procurement.helpcenter.models.Paragraph;
 import be.procurement.helpcenter.models.Section;
-//import be.procurement.helpcenter.models.Section;
-import be.procurement.helpcenter.repositories.ParagraphRepository;
+import be.procurement.helpcenter.repositories.SectionRepository;
 
 @RestController
-@RequestMapping("/paragraphs")
-class ParagraphController {
+@RequestMapping("/sections")
+public class SectionController {
 
     @Autowired
-    private ParagraphRepository repository;
+    private SectionRepository repository;   
+     
 
     @GetMapping
-    public List<Paragraph> findAll() {
+    public List<Section> findAll() {
         return repository.findAll();
     }
 
     @GetMapping(value = "/{id}")
-    public Optional<Paragraph> findById(@PathVariable("id") Long id) {
+    public Optional<Section> findById(@PathVariable("id") Long id) {
         return repository.findById(id);
     }
  
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public Paragraph create(@RequestBody Paragraph resource) {
+    public Section create(@RequestBody Section resource) {
         Preconditions.checkNotNull(resource);
         return repository.save(resource);
     }
  
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Paragraph update(@PathVariable( "id" ) Long id, @RequestBody Paragraph resource) {
+    public Section update(@PathVariable( "id" ) Long id, @RequestBody Section resource) {
         Preconditions.checkNotNull(resource);       
-        Paragraph p = (repository.findById(id)).get();
+        Section p = (repository.findById(id)).get();
         
-        if(resource.getTitle()!=null){
-            p.setTitle(resource.getTitle());
-        }
-        
-        if(resource.getBody()!=null){
-            p.setBody(resource.getBody());
-        }
-        
-        if(resource.getSection()!=null){
-            p.setSection(resource.getSection());
-        }
-        
+        p.setTitle(resource.getTitle());
+
         return repository.save(p); 
     }
  
@@ -71,5 +61,13 @@ class ParagraphController {
     public void delete(@PathVariable("id") Long id) {
         repository.deleteById(id);
     }
- 
+    
+    @GetMapping(value = "/{id}/paragraphs")
+    public List<Paragraph> findParagraphs(@PathVariable("id") Long id){
+        Section section = repository.findById(id).get();
+        return section.getParagraphs();
+
+    }
+    
+    
 }
