@@ -10,7 +10,7 @@ import be.procurement.helpcenter.models.Section;
 @Repository
 public interface SectionRepository extends JpaRepository<Section, Long> {
     
-    List<Section> findByTitle(String title);    
+    List<Section> findByTitleContainingIgnoreCase(String title);    
     List<Section> findAll();
 
 }
