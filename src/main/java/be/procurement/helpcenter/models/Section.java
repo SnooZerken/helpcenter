@@ -3,6 +3,7 @@ package be.procurement.helpcenter.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +25,7 @@ public class Section {
     private String title;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "section", fetch = FetchType.LAZY)
     private List<Paragraph> paragraphs = new ArrayList<Paragraph>();
   
     public long getId() {
